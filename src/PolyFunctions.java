@@ -1,7 +1,7 @@
 public interface PolyFunctions {
     public void setCoefficient(int coef, int power);
 
-    public Polynomial insert(Polynomial list, int coeff, int power);
+    public void insert(int coeff, int power);
 
     public String toString();
 

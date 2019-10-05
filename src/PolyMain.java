@@ -5,12 +5,12 @@ public class PolyMain {
         Polynomial poly = new Polynomial();
 
 
-        poly.insert(poly,4,6);
-        poly.insert(poly,7,2);
-
-        System.out.println("Change coeff:");
+        poly.insert(4,6);
+        poly.insert(7,2);
+        poly.insert(6,3);
         System.out.println(poly.toString());
 
+        System.out.println("Change coeff:");
         poly.setCoefficient(4,5);
         poly.setCoefficient(4,2);
         poly.setCoefficient(6,4);
@@ -24,11 +24,12 @@ public class PolyMain {
 
 
 
+        System.out.println("Second Polynomial");
         Polynomial poly2 = new Polynomial();
 
-        poly.insert(poly,6,1);
-        poly.insert(poly,2,7);
-        System.out.println(poly.toString());
+        poly2.insert(6,1);
+        poly2.insert(2,7);
+        System.out.println(poly2.toString());
 
         poly2.setCoefficient(1,3);
         poly2.setCoefficient(6,7);
@@ -37,11 +38,13 @@ public class PolyMain {
         poly2.setCoefficient(12,4);
 
         System.out.println("Change coeff:");
-        System.out.println(poly.toString());
+        System.out.println(poly2.toString());
 
-        System.out.println("Add polynomials: ");
+       /* System.out.println("Add polynomials: ");
         Polynomial newPoly =poly.add(poly2);
         System.out.println(poly.toString());
+
+        */
 
 
 

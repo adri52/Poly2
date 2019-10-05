@@ -2,9 +2,11 @@
 public class Polynomial implements PolyFunctions {
 
     //Fields
+    private int degree;
     private Term head;
 
-    static class Term {
+
+    class Term {
         private int coeff;
         private int power;
         private Term next;
@@ -24,23 +26,24 @@ public class Polynomial implements PolyFunctions {
         }
     }
 
-    private int degree = setDegree();
 
 
-    private int setDegree() {
+
+    private void setDegree() {
         int maxPow = 0;
-        Term curr = this.head.next;
+        Term curr = head;
 
 
-        while (curr.next != null) {
+        while (curr != null) {
             if (curr.power > maxPow)
                 maxPow = curr.power;
-            else {
-                curr = curr.next;
-            }
+            curr = curr.next;
         }
-        return maxPow;
+
+        degree = maxPow;
     }
+
+
 
 
 
@@ -50,10 +53,10 @@ public class Polynomial implements PolyFunctions {
     }
 
 
-
+    //Chemge ot in such way that it adds a term in such way that is sorted
     // Method to insert a new node
     @Override
-    public Polynomial insert(Polynomial list, int coeff, int power)
+    public void insert( int coeff, int power)
     {
         // Create a new node with given data
         Term new_term = new Term(coeff, power);
@@ -61,13 +64,13 @@ public class Polynomial implements PolyFunctions {
 
         // If the Linked List is empty,
         // then make the new node as head
-        if (list.head == null) {
-            list.head = new_term;
+        if (head == null) {
+            head = new_term;
         }
         else {
             // Else traverse till the last node
             // and insert the new_node there
-            Term last = list.head;
+            Term last = head;
             while (last.next != null) {
                 last = last.next;
             }
@@ -75,9 +78,7 @@ public class Polynomial implements PolyFunctions {
             // Insert the new_node at last node
             last.next = new_term;
         }
-
-        // Return the list by head
-        return list;
+        setDegree();
     }
 
 
@@ -85,62 +86,64 @@ public class Polynomial implements PolyFunctions {
 
 
 
-
+    //not insertiing
     @Override
     public void setCoefficient(int coeff, int power) {
-        Term curr = head.next;
+        Term curr = head;
+        if (curr == null)
+            insert(coeff, power);
 
-        while(curr != null) {
+        else {
+            while (curr.next != null) {
+                if (curr.power == power)
+                    curr.coeff = coeff;
 
-            if (curr.power == power)
-                curr.coeff = coeff;
+                if (curr.next == null)
+                    insert(coeff, power);
 
-            if (curr.next == null)
-                this.insert(this,coeff,power);
-
-            else
-                curr= curr.next;
-
+                curr = curr.next;
+            }
         }
-
     }
 
 
+//*********************************************************************
     @Override
     public String toString() {
-        Term curr = this.head.next;
+        Term curr = head;
         StringBuilder poly = new StringBuilder();
         //  Polynomial temp = curr;
 
+
+        //assuming that the polynomial is not sorted. *****************
         while(curr != null) {
             if (curr.power == 0 && curr.next == null)
                 poly.append(curr.coeff);
             if (curr.power == 0)
-                poly.append(curr.coeff + "+ ");
+                poly.append(curr.coeff).append(" + ");
             if (curr.next == null)
-                poly.append(curr.coeff + "x^" + curr.power);
+                poly.append(curr.coeff).append("x^").append(curr.power);
             else
-                poly.append(curr.coeff).append("x^").append(curr.power).append("+ ");
+                poly.append(curr.coeff).append("x^").append(curr.power).append(" + ");
             curr = curr.next;
         }
-        return null;
+        return poly.toString();
     }
 
     @Override
     public double evaluate(double x) {
-        Term curr = this.head.next;
+        Term curr = head;
         double base = 1;
         double total = 0;
         while(curr != null){
-            while(curr.power !=0) {
-                base *= x;
-                --curr.power;
-            }
+            for(int i = 0; i< curr.power; i++)
+                base *=x;
             total += curr.coeff * base;
             curr = curr.next;
         }
         return total;
     }
+
 
     @Override
     public Polynomial add(Polynomial other) {
