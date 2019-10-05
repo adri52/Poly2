@@ -53,7 +53,7 @@ public class Polynomial implements PolyFunctions {
     }
 
 
-    //Chemge ot in such way that it adds a term in such way that is sorted
+    //Change ot in such way that it adds a term in such way that is sorted
     // Method to insert a new node
     @Override
     public void insert( int coeff, int power)
@@ -86,7 +86,7 @@ public class Polynomial implements PolyFunctions {
 
 
 
-    //not insertiing
+
     @Override
     public void setCoefficient(int coeff, int power) {
         Term curr = head;
@@ -95,10 +95,12 @@ public class Polynomial implements PolyFunctions {
 
         else {
             while (curr != null) {
-                if (curr.power == power)
+                if (curr.power == power) {
                     curr.coeff = coeff;
+                    break;
+                }
 
-                else if (curr.next == null)
+                if (curr.next == null)
                     insert(coeff, power);
 
                 curr = curr.next;
@@ -119,9 +121,13 @@ public class Polynomial implements PolyFunctions {
         while(curr != null) {
             if (curr.power == 0 && curr.next == null)
                 poly.append(curr.coeff);
-            if (curr.power == 0)
+            else if (curr.power == 0)
                 poly.append(curr.coeff).append(" + ");
-            if (curr.next == null)
+            else if (curr.power == 1 && curr.next == null)
+                poly.append(curr.coeff).append("x");
+            else if (curr.power == 1)
+                poly.append(curr.coeff).append("x").append(" + ");
+            else if (curr.next == null)
                 poly.append(curr.coeff).append("x^").append(curr.power);
             else
                 poly.append(curr.coeff).append("x^").append(curr.power).append(" + ");
@@ -133,9 +139,10 @@ public class Polynomial implements PolyFunctions {
     @Override
     public double evaluate(double x) {
         Term curr = head;
-        double base = 1;
+
         double total = 0;
         while(curr != null){
+            double base = 1;
             for(int i = 0; i< curr.power; i++)
                 base *=x;
             total += curr.coeff * base;
@@ -151,16 +158,16 @@ public class Polynomial implements PolyFunctions {
         //declare what we are going to use
         Polynomial newPoly = new Polynomial();
         //my "pointers" that will go through the lists
-        Term thisCurr = this.head.next;
-        Term otherCurr = other.head.next;
+        Term thisCurr = head;
+        Term otherCurr = other.head;
         Term newPolyCurr;
 
 
         //we copy the first polynomial to the new polynomial link list
-        newPoly.head = this.head;
-        newPolyCurr = newPoly.head.next;
+        newPoly.head = head;
+        newPolyCurr = newPoly.head;
 
-        while (thisCurr.next != null) {
+        while (thisCurr != null) {
 
             newPolyCurr = thisCurr;
             thisCurr = thisCurr.next;
@@ -175,23 +182,25 @@ public class Polynomial implements PolyFunctions {
             newPoly.degree = other.degree;
 
         //we return thisCurr to the head.
-        thisCurr = this.head.next;
+        thisCurr = head;
+        newPolyCurr = newPoly.head;
 
 
-        //We copy the original polynomial to a new polynimial
+        //We copy the original polynomial to a new polynomial
         //then we check if a the "other" polynomial has same exponentials
         //if they do then they add, if not we go to the next one.
-        for (int i = 0; i < other.degree; i++) {
-            for (int n = 0; n < newPoly.degree; n++) {
+        while(otherCurr != null) {
+            while(newPolyCurr != null) {
                 if (thisCurr.power == otherCurr.power) {
                     newPolyCurr.coeff = newPolyCurr.coeff + otherCurr.coeff;
                     break;
                 }
-                if (n == (other.degree - 1) && thisCurr.power != otherCurr.power) {
-                    newPolyCurr.next.coeff = otherCurr.coeff;
-                    newPolyCurr.next.power = otherCurr.power;
-                } else
-                    newPolyCurr = newPolyCurr.next;
+                if (newPolyCurr.next == null) {
+                    newPoly.insert(otherCurr.coeff, otherCurr.power);
+                    break;
+                }
+                thisCurr = thisCurr.next;
+                newPolyCurr = newPolyCurr.next;
             }
             otherCurr = otherCurr.next;
         }

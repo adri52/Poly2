@@ -40,11 +40,11 @@ public class PolyMain {
         System.out.println("Change coeff:");
         System.out.println(poly2.toString());
 
-       /* System.out.println("Add polynomials: ");
+       System.out.println("Add polynomials: ");
         Polynomial newPoly =poly.add(poly2);
         System.out.println(poly.toString());
 
-        */
+
 
 
 

@@ -3,7 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="bb6457d1-b6ee-41a9-9c1f-1aa579b3af6c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Poly2/PolyMain.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Poly2/PolyMain.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Poly2/Polynomial.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Poly2/Polynomial.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PolyMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PolyMain.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Polynomial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Polynomial.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -84,17 +86,9 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/PolyMain.java</url>
-          <line>13</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/Polynomial.java</url>
-          <line>133</line>
-          <properties class="Polynomial" method="evaluate">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="6" />
+          <line>191</line>
+          <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
