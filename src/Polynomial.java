@@ -94,11 +94,11 @@ public class Polynomial implements PolyFunctions {
             insert(coeff, power);
 
         else {
-            while (curr.next != null) {
+            while (curr != null) {
                 if (curr.power == power)
                     curr.coeff = coeff;
 
-                if (curr.next == null)
+                else if (curr.next == null)
                     insert(coeff, power);
 
                 curr = curr.next;
